@@ -14,4 +14,36 @@ The proposed CWS-DTSA showed promising results in optimizing benchmark CVRPs. Th
 Based on the findings, we recommend further exploration of the proposed algorithm's potential in solving more complex optimization problems. Specifically, future studies may focus on enhancing the algorithm's consistency in achieving optimal solutions by adjusting the maximum number of function evaluations. Additionally, the algorithm's performance in real-world scenarios could also be explored further. Overall, the results of this study suggest that the proposed algorithm is a promising approach in solving the Capacitated Vehicle Routing benchmark problems and has the potential for broader application in various optimization problems.
 
 ## The Capacitated Vehicle Routing Problem
-CVRP is defined as a graph *G = (V, E)* which consists of nodes *V = {0, 1, ..., N}* and an edge set *E = {(i, j) : i, j ∈ V}*. Vertex 0 represents the depot and the other nodes {1, 2, ..., N} represents the customers who have specific demands *q<sub>i</sub>*, where *i = {1, 2, ..., N}*, to be delivered. The travel cost between node *i* and *j* is defined by *c<sub>i, j</sub> > 0*. For a single depot, a set of homogeneous vehicles *K* with capacity limit *Q* depart from and return to. If vehicle *k* travels from customer *i* to customer *j* directly, *X<sub>ij</sub><sup>k</sup> = 1* otherwise, *X<sub>ij</sub><sup>k</sup> = 0*. Hence, the objective function of CVRP is *f = Σ<sup>N</sup><sub>i = 0</sub>Σ<sup>N</sup><sub>j = 0</sub>Σ<sup>K</sup><sub>k = 0</sub>C<sub>ij</sub>X<sub>ij</sub><sup>k</sup>*
+CVRP is defined as a graph *G = (V, E)* which consists of nodes *V = {0, 1, ..., N}* and an edge set *E = {(i, j) : i, j ∈ V}*. Vertex 0 represents the depot and the other nodes {1, 2, ..., N} represents the customers who have specific demands *q<sub>i</sub>*, where *i = {1, 2, ..., N}*, to be delivered. The travel cost between node *i* and *j* is defined by *c<sub>i, j</sub> > 0*. For a single depot, a set of homogeneous vehicles *K* with capacity limit *Q* depart from and return to. If vehicle *k* travels from customer *i* to customer *j* directly, *X<sub>ij</sub><sup>k</sup> = 1* otherwise, *X<sub>ij</sub><sup>k</sup> = 0*. Hence, the objective function of CVRP is *f = Σ<sup>N</sup><sub>i = 0</sub> Σ<sup>N</sup><sub>j = 0</sub> Σ<sup>K</sup><sub>k = 0</sub> C<sub>ij</sub>X<sub>ij</sub><sup>k</sup>*, which minimizes the total distance traveled by the vehicles, is subject to sme constraints such as (i) customers can only be serviced by one vehicle, (ii) the total demand of all customers on any route must not exceed the vehicle capacity *Q*, and (iii) all routes must start and finish at the same depot after servicing the customers. 
+
+A solution of CVRP is feasible if all routes satisfy the capacity constraint and no customer is visited more than once. The number of vehicles *K* that serve the customers will be a decision variable in this study such that we are not limiting the routes by the number of vehicles. Hence, expect that there will be routes with more or less vehicles than the expected number of vehicles.
+
+## The Discrete Tree-Seed Algorithm
+The DTSA is a stochastic, nature-inspired, metaheuristic algorithm that mimics the relationship between trees and seeds. The reason for this miicry is that as seeds grow, they replace the tree where it came from. The algorithm was a version of the original TSA. TSA was used for continuous optimization problems while DTSA was used to solve symmetric TSPs.
+
+The trees and seeds represent the possible tours for the CVRP problem. These are represented by various combinations of routes. In addition, the number of dimensions *D*, is the number of the vertices excluding the depot. For example, if the number of vertices/customers is 6, then *D = 6* which also shows that each customer *v<sub>i</sub>* is a 6-tuple with D = V = (*v<sub>1</sub>v<sub>2</sub>v<sub>3</sub>v<sub>4</sub>v<sub>5</sub>v<sub>6</sub>*), and the search space can be represented as, *I = I<sub>1</sub> &#215; I<sub>2</sub> &#215; I<sub>3</sub> &#215; I<sub>4</sub> &#215; I<sub>5</sub> &#215; I<sub>6</sub>* where each search space *I<sub>n</sub>* consists of all possible combinations of valid trees and seeds for the given CVRP instance. Specifically, the search space for the CVRP is determined by all possible ways of dividing the customer nodes into feasible routes. The search space size depends on the customer nodes, the vehicle capacity, and other constraints. For instance, if there are 3 customer nodes, a single vehicle with a capacity of 5, and no distance constraints, the search space might be:
+
+Number of possible routes for one vehicle: *3C1 + 3C2 + 3C3 = 7*
+Number of possible node sequences for each route: *3! = 6*
+Total number of possible solutions: *I = 7 &#215; 6 = 42*
+
+Since the trees and seeds are used as a permutation of the customers, each tree and seed is unique and can only represent one CVRP solution. For instance, if our CVRP consists of 6 customers, one of the trees that can be used is *t = v<sub>0</sub>v<sub>6</sub>v<sub>2</sub>v<sub>3</sub>v<sub>5</sub>v<sub>1</sub>v<sub>4</sub>v<sub>0</sub>*. To improve this initial tree into a desired solution, the seeds are created using transformation operators with details about *Q* and *q<sub>i<\sub>*. Hence, one possible seed is, *s = v<sub>0</sub>v<sub>6</sub>v<sub>3</sub>v<sub>0</sub>v<sub>2</sub>v<sub>5</sub>v<sub>0</sub>v<sub>1</sub>v<sub>4</sub>v<sub>0</sub>*, such that CVRP constraints were followed.
+
+## Clarke-Wright Savings Algorithm
+The Clarke and Wright "savings" algorithm (CWS) is one of the best-known and simplest approaches to solve the VRP. Since the original formula for the savings matrix of the CWS does not guarantee optimal nor near-optimal results, we used Paessens' savings formula that is,
+
+s(i, j) = [d(v0 , i) + d(v0 , j) − λd(i, j)] + [µ|d(v0 , i) − d(v0 , j)|]
+
+where {λ ∈ R : 0 < λ ≤ 2} and {µ ∈ R : 0 < µ ≤ 2}. The values λ and µ greatly affect the routes generated by the CWS. The route shape parameter λ controls the shape of the routes. By adjusting this parameter, it is possible to generate routes that are more or less efficient. For instance, if λ is set to a low value, the total distance traveled is minimized so as the number of vehicles. Otherwise, it will generate routes that are more compact and cover a smaller area. The correction term µ, on the other hand, penalizes the savings obtained from combining customers with large demands that exceed the capacity of the vehicle such that if the combined demand of customers *i* and *j* are high, the greater the penalty and makes it less likely for these nodes to be combined into the same route.
+
+## Initialization
+The DTSA starts with the intialization of a population of trees. The first tree is created by using CWS while the other trees are created as random permutations of the vertices of an instance of a VRP.
+
+## Transformation Operators
+The seeds are generated using transformation operators swap, shift, and symmetry.
+
+## 2-Opt heuristic
+The best tree generated by the CWS-DTSA are the input for the 2-Opt heuristic and will be further improved to get to the optimal solution.
+
+## Sub Route Modifier for Capacity Constraint
+Since the final output of the 2-Opt heuristic is a route divided by the depots, this route is decoded into a list of lists for simplicity.
