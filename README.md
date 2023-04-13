@@ -13,6 +13,27 @@ The proposed CWS-DTSA showed promising results in optimizing benchmark CVRPs. Th
 
 Based on the findings, we recommend further exploration of the proposed algorithm's potential in solving more complex optimization problems. Specifically, future studies may focus on enhancing the algorithm's consistency in achieving optimal solutions by adjusting the maximum number of function evaluations. Additionally, the algorithm's performance in real-world scenarios could also be explored further. Overall, the results of this study suggest that the proposed algorithm is a promising approach in solving the Capacitated Vehicle Routing benchmark problems and has the potential for broader application in various optimization problems.
 
+## Hardware and Software Specifications
+
+The experiments were conducted on an Aspire A315-41G laptop equipped
+with AMD Ryzen 3 2200U with Radeon Vega Mobile Gfx @ 2.50GHz and 12.0 Gigabytes
+installed RAM. The computer was running on the Windows 10 operating system. The use
+of this hardware allowed us to obtain quality solutions within a reasonable amount of time.
+
+The CWS-DTSA was built using Python libraries such as Pandas, Numpy, Matplotlib, and
+VeRyPy.
+
+* **Pandas** is an open source Python package used for data analysis and machine learning tasks. It is built on top of another package named Numpy, which provides support for multi-dimensional arrays.
+
+     – **DataFrame** is a 2-dimensional data structure with columns of potentially different types. In this study, DataFrame was used to assign the (x, y) coordinate
+values.
+
+* **Numpy** is used for the scientific computing of the mean and standard deviation of the n-dimensional array.
+
+* **Matplotlib** is a comprehensive library for creating static, animated, and interactive visualization in python. The figures of this study will be generated using Matplotlib.
+
+* **VeRyPy** is an easy to use library of classical CVRP algorithms with symmetric distances. Compared to the existing heuristic and metaheuristic open source VRP libraries, it focuses on re-usability of the code and in faithful recreation of the original algorithms.
+
 ## The Capacitated Vehicle Routing Problem
 CVRP is defined as a graph *G = (V, E)* which consists of nodes *V = {0, 1, ..., N}* and an edge set *E = {(i, j) : i, j ∈ V}*. Vertex 0 represents the depot and the other nodes {1, 2, ..., N} represents the customers who have specific demands *q<sub>i</sub>*, where *i = {1, 2, ..., N}*, to be delivered. The travel cost between node *i* and *j* is defined by *c<sub>i, j</sub> > 0*. For a single depot, a set of homogeneous vehicles *K* with capacity limit *Q* depart from and return to. If vehicle *k* travels from customer *i* to customer *j* directly, *X<sub>ij</sub><sup>k</sup> = 1* otherwise, *X<sub>ij</sub><sup>k</sup> = 0*. Hence, the objective function of CVRP is *f = Σ<sup>N</sup><sub>i = 0</sub> Σ<sup>N</sup><sub>j = 0</sub> Σ<sup>K</sup><sub>k = 0</sub> C<sub>ij</sub>X<sub>ij</sub><sup>k</sup>*, which minimizes the total distance traveled by the vehicles, is subject to sme constraints such as (i) customers can only be serviced by one vehicle, (ii) the total demand of all customers on any route must not exceed the vehicle capacity *Q*, and (iii) all routes must start and finish at the same depot after servicing the customers. 
 
