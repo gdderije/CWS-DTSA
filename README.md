@@ -20,7 +20,7 @@ with AMD Ryzen 3 2200U with Radeon Vega Mobile Gfx @ 2.50GHz and 12.0 Gigabytes
 installed RAM. The computer was running on the Windows 10 operating system. The use
 of this hardware allowed us to obtain quality solutions within a reasonable amount of time.
 
-The CWS-DTSA was built using Python libraries such as Pandas, Numpy, Matplotlib, and
+The CWS-DTSA was built using Python 3.10.6 libraries such as Pandas, Numpy, Matplotlib, and
 VeRyPy.
 
 * **Pandas** is an open source Python package used for data analysis and machine learning tasks. It is built on top of another package named Numpy, which provides support for multi-dimensional arrays.
