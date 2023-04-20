@@ -126,7 +126,6 @@ def DTSA(route, distance_matrix, num_vertices, population_size, search_tendency,
     FE = 0
     trees = initializeTrees(route, num_vertices, population_size)
     distances = [getRouteCost(routeToSubroute(tree, file), distance_matrix) for tree in trees]
-    # print(f'Trees: {trees, distances}')
     FE += population_size
     best_tree_index = distances.index(min(distances))
     while FE < max_FE:
@@ -152,7 +151,6 @@ def DTSA(route, distance_matrix, num_vertices, population_size, search_tendency,
                 seeds.append(shift(random_tree))
                 seeds.append(symmetry(random_tree))
             seed_distances = [getRouteCost(routeToSubroute(seed, file), distance_matrix) for seed in seeds]
-            # print(f'Seeds: {seeds, seed_distances}')
             FE += 6
             best_seed_distance = min(seed_distances)
             best_seed = seeds[seed_distances.index(best_seed_distance)]
@@ -276,8 +274,8 @@ def solveCVRP(save_graphs=True):
         print(f'\t{"Vertex" : ^6}{"Coordinate" : ^15}{"Demand" : ^20}')
         for i in range(num_vertices):
             print(f'\t{i : ^6}{str(vertices[i]) : ^15}{str(demand_list[i]) : ^20}')
-        population_size = 10
-        search_tendency = 0.2
+        population_size = 10            # Control parameter
+        search_tendency = 0.1           # Control parameter
         final_distances = []
         errors = []
         print("Results:")
