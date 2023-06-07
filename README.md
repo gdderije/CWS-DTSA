@@ -74,5 +74,5 @@ Input the .VRP file and the optimal distance in the VRP list of tuples. The main
 
 For each tree being evaluated, transformation operators are used to generate a population of seeds, then the least-cost seed is identified as the best seed. The current tree and the best seed are then compared during the iteration. If the seed has a lower-cost than the current tree, then the seed will replace the current tree. Otherwise, the algorithm will continue to the next tree without considering the replacement of the current tree.
      
-Overall, to use the Clarke-Wright Savings - Discrete Tree-Seed Algorithm, you just have to inout the .VRP file and the optimal distance in the list of tuples and let the program to do the work.
+Overall, to use the Clarke-Wright Savings - Discrete Tree-Seed Algorithm, you just have to input the .VRP file and the optimal distance in the list of tuples and let the program do the work.
 
